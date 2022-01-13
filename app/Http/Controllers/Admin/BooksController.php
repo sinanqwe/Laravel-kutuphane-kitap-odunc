@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -50,10 +51,11 @@ class BooksController extends Controller
         $data->keywords = $request->input('keywords');
         $data->description = $request->input('description');
         $data->image = Storage::putFile('images', $request->file('image'));
-        $data->category_id = $request->input('category_id');
+        $data->categories_id = $request->input('categories_id');
         $data->quantity = $request->input('quantity');
         $data->detail = $request->input('detail');
         $data->status = $request->input('status');
+        $data->user_id = Auth::id();
         $data->save();
 
         return redirect()->route('admin_books');
@@ -99,7 +101,7 @@ class BooksController extends Controller
         $data->keywords = $request->input('keywords');
         $data->description = $request->input('description');
         $data->image = Storage::putFile('image', $request->file('image'));
-        $data->category_id = $request->input('category_id');
+        $data->categories_id = $request->input('categories_id');
         $data->quantity = $request->input('quantity');
         $data->detail = $request->input('detail');
         $data->status = $request->input('status');

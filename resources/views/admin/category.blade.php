@@ -24,11 +24,12 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Kategori</th>
-                            <th>Statü</th>
+                            <th>Parent id</th>
                             <th>Title</th>
                             <th>Keywords</th>
                             <th>Description</th>
+                            <th>Resim</th>
+                            <th>Statü</th>
                             <th>Düzenle</th>
                             <th>Sil</th>
                         </tr>
@@ -36,11 +37,12 @@
                     <tfoot>
                         <tr>
                             <th>ID</th>
-                            <th>Kategori</th>
-                            <th>Statü</th>
+                            <th>Parent id</th>
                             <th>Title</th>
                             <th>Keywords</th>
                             <th>Description</th>
+                            <th>Resim</th>
+                            <th>Statü</th>
                             <th>Düzenle</th>
                             <th>Sil</th>
                         </tr>
@@ -49,11 +51,19 @@
                         @foreach($datalist as $rs)
                         <tr>
                             <td>{{$rs->id}}</td>
-                            <td>{{$rs->type}}</td>
-                            <th>{{$rs->status}}</th>
+                            <td>
+                               <!-- {{\App\Http\Controllers\CategoryController::getParentsTree($rs, $rs->title)}}-->
+                               {{$rs-parent_id}}
+                            </td>
                             <td>{{$rs->title}}</td>
                             <td>{{$rs->keywords}}</td>
                             <th>{{$rs->description}}</th>
+                            <td>
+                                @if($rs->image)
+                                    <img src="{{Storage::url($rs->image)}}" height="30" alt="">
+                                @endif
+                            </td>
+                            <th>{{$rs->status}}</th>
                             <td><a href="{{route('admin_category_edit', ['id'=> $rs->id])}}"><i class="fas fa-edit"></i>Düzenle</a></td>
                             <td><a href="{{route('admin_category_delete', ['id'=> $rs->id])}}" onclick="return confirm('Silmek istediğine emin misin ?')"><i class="fas fa-trash-alt"></i>Sil</a></td>
                         </tr>

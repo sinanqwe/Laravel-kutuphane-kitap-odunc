@@ -6,9 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+
+    protected $appends = [
+        'getParentsTree'
+    ];
+
+    public static function getParentsTree($category, $title)
+    {
+        if($category->parent_id == 0){
+            return $title;
+        }
+
+        $parent = Category::find($category->parent_id);
+         $title = $parent->title . ' > ' .$title;
+
+         return CategoryController::getParentsTree($parent,$title);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +34,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $datalist = DB::select('select * from categories');
+        $datalist = Category::with('children')->get();
         return view('admin.category', ['datalist' => $datalist]);
     }
 
@@ -40,11 +58,12 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
         DB::table('categories')->insert([
-            'type' => $request->input('type'),
-            'status' => $request->input('status'),
+            'parent_id' => $request->input('parent_id'),
             'title' => $request->input('title'),
             'keywords' => $request->input('keywords'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
+            'image' => Storage::putFile('images', $request->file('image')),
+            'status' => $request->input('status')
         ]);
 
         return redirect(route('admin_category'));
@@ -95,12 +114,14 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category, $id)
     {
         $data = Category::find($id);
-        $data->type = $request->input('type');
-        $data->status = $request->input('status');
+        $data->parent_id = $request->input('parent_id');
         $data->title = $request->input('title');
         $data->keywords = $request->input('keywords');
         $data->description = $request->input('description');
+        $data->image = Storage::putFile('image', $request->file('image'));
+        $data->status = $request->input('status');
         $data->save();
+
         return redirect(route('admin_category'));
     }
 
@@ -113,7 +134,6 @@ class CategoryController extends Controller
     public function destroy(Category $category,$id)
     {
         DB::table('categories')->where('id','=', $id)->delete();
-
         return redirect(route('admin_category'));
     }
 }

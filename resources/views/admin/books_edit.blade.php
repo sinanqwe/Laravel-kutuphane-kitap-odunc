@@ -23,10 +23,10 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Kategori</label>
-            <select name="category_id">
+            <select name="categories_id">
                 <option selected enabled>Seç</option>
                 @foreach ($data as $rs)
-                    <option value="{{$rs->id}}">{{$rs->type}}</option>
+                    <option value="{{$rs->id}}">{{$rs->title}}</option>
                 @endforeach
             </select>
             <label class="form-label">Statü</label>

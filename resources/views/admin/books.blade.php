@@ -28,10 +28,11 @@
                             <th>Title</th>
                             <th>Keywords</th>
                             <th>Description</th>
-                            <th>Resim</th>
-                            <th>category_id</th>
+                            <th>categories_id</th>
                             <th>Miktar</th>
                             <th>Statü</th>
+                            <th>Resim</th>
+                            <th>Galeri</th>
                             <th>Düzenle</th>
                             <th>Sil</th>
                         </tr>
@@ -44,10 +45,11 @@
                             <th>Title</th>
                             <th>Keywords</th>
                             <th>Description</th>
-                            <th>Resim</th>
-                            <th>category_id</th>
+                            <th>categories_id</th>
                             <th>Miktar</th>
                             <th>Statü</th>
+                            <th>Resim</th>
+                            <th>Galeri</th>
                             <th>Düzenle</th>
                             <th>Sil</th>
                         </tr>
@@ -61,16 +63,17 @@
                             <td>{{$rs->title}}</td>
                             <td>{{$rs->keywords}}</td>
                             <th>{{$rs->description}}</th>
+                            <td>{{$rs->categories_id}}</td>
+                            <td>{{$rs->quantity}}</td>
+                            <th>{{$rs->status}}</th>
                             <td>
                                 @if($rs->image)
                                     <img src="{{Storage::url($rs->image)}}" height="30" alt="">
                                 @endif
                             </td>
-                            <td>{{$rs->category_id}}</td>
-                            <td>{{$rs->quantity}}</td>
-                            <th>{{$rs->status}}</th>
-                            <td><a href="{{route('admin_books_edit', ['id'=> $rs->id])}}"><i class="fas fa-edit"></i>Düzenle</a></td>
-                            <td><a href="{{route('admin_books_delete', ['id'=> $rs->id])}}" onclick="return confirm('Silmek istediğine emin misin ?')"><i class="fas fa-trash-alt"></i>Sil</a></td>
+                            <th><a href="{{route('admin_image_add',['id'=> $rs->id])}}" onclick="return !window.open(this.href, '', 'top=50 left=100 width=1100, height=700')"><i class="fas fa-image"></i></th>
+                            <td><a href="{{route('admin_books_edit', ['id'=> $rs->id])}}"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="{{route('admin_books_delete', ['id'=> $rs->id])}}" onclick="return confirm('Silmek istediğine emin misin ?')"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
