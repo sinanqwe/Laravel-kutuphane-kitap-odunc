@@ -10,21 +10,18 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
-
-    protected $appends = [
+    protected $appends=[
         'getParentsTree'
     ];
-
     public static function getParentsTree($category, $title)
     {
-        if($category->parent_id == 0){
+        if ($category->parent_id == 0)
+        {
             return $title;
         }
-
         $parent = Category::find($category->parent_id);
-         $title = $parent->title . ' > ' .$title;
-
-         return CategoryController::getParentsTree($parent,$title);
+        $title = $parent->title.'>'.$title;
+        return CategoryController::getParentsTree($parent,$title);
     }
 
     /**
@@ -35,30 +32,21 @@ class CategoryController extends Controller
     public function index()
     {
         $datalist = Category::with('children')->get();
-        return view('admin.category', ['datalist' => $datalist]);
+        return view('admin.category',['datalist'=>$datalist]);
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function add()
     {
-        $datalist = DB::select('select * from categories');
-        return view('admin.category_add', ['datalist' => $datalist]);
+        $datalist = Category::with('children')->get();
+        return view('admin.category_add',['datalist'=>$datalist]);
     }
-    
-    /**
-     * Show the form for creating a new resource.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function create(Request $request)
     {
         DB::table('categories')->insert([
             'parent_id' => $request->input('parent_id'),
+            'type' => $request->input('type'),
             'title' => $request->input('title'),
             'keywords' => $request->input('keywords'),
             'description' => $request->input('description'),
@@ -68,7 +56,6 @@ class CategoryController extends Controller
 
         return redirect(route('admin_category'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -97,10 +84,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category, $id)
+    public function edit(Category $category,$id)
     {
         $data = Category::find($id);
-        $datalist = DB::select('select * from categories');
+        $datalist = Category::with('children')->get();
         return view('admin.category_edit', ['data' => $data, 'datalist'=> $datalist]);
     }
 
@@ -111,10 +98,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category, $id)
+    public function update(Request $request, Category $category,$id)
     {
         $data = Category::find($id);
         $data->parent_id = $request->input('parent_id');
+        $data->type = $request->input('type');
         $data->title = $request->input('title');
         $data->keywords = $request->input('keywords');
         $data->description = $request->input('description');

@@ -10,16 +10,17 @@
     <form role="form" action="{{route('admin_category_create')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Parent id</label>
-            <input type="text" name="parent_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="exampleInputEmail1" class="form-label">Main Category</label>
+            <select name="parent_id">
+                <option value="0" selected="selected">Main Category</option>
+                @foreach($datalist as $rs)
+                    <option value="{{$rs->id}}">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
-            <label class="form-label">Statü</label>
-            <select name="status">
-                <option selected disabled>Seç</option>
-                <option>True</option>
-                <option>False</option>
-            </select>
+            <label for="exampleInputEmail1" class="form-label">Tür</label>
+            <input type="text" name="type" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Title</label>
@@ -36,6 +37,14 @@
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Resim</label>
             <input type="file" name="image" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Statü</label>
+            <select name="status">
+                <option selected disabled>Seç</option>
+                <option>True</option>
+                <option>False</option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Ekle</button>

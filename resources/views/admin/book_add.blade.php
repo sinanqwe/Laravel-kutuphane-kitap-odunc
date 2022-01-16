@@ -12,33 +12,9 @@
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-800">Kitap Ekle</h1>
 
-    <form role="form" action="{{route('admin_books_store')}}" method="post" enctype="multipart/form-data">
+    <form role="form" action="{{route('admin_book_store')}}" method="post" enctype="multipart/form-data">
         @csrf
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Kitap İsmi</label>
-            <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Yazar</label>
-            <input type="text" name="writer" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Kategori</label>
-            <select name="categories_id">
-                <option selected disabled>Seç</option>
-                @foreach ($data as $rs)
-                    <option value="{{$rs->id}}">{{$rs->title}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Statü</label>
-            <select name="status">
-                <option selected disabled>Seç</option>
-                <option>True</option>
-                <option>False</option>
-            </select>
-        </div>
+        
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Title</label>
             <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -50,6 +26,14 @@
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Description</label>
             <input type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Tür</label>
+            <input type="text" name="type" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Available</label>
+            <input type="number" name="available" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Detaylar</label>
@@ -71,13 +55,26 @@
                 });
             </script>
         </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Miktar</label>
-            <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
+
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Resim</label>
             <input type="file" name="image" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Kategori</label>
+            <select name="category_id">
+                <option selected>Main</option>
+                @foreach($data as $rs)
+                    <option value="{{$rs->id}}">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}}</option>
+                @endforeach
+            </select>
+    
+            <label class="form-label">Statü</label>
+            <select name="status">
+                <option selected disabled>Seç</option>
+                <option>True</option>
+                <option>False</option>
+            </select>
         </div>
         
         <button type="submit" class="btn btn-primary">Ekle</button>

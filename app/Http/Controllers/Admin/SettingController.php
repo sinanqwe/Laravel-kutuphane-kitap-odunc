@@ -13,7 +13,7 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
         $data = Setting::first();
         if(!$data){

@@ -10,17 +10,19 @@
     <form role="form" action="{{route('admin_category_update', ['id'=>$data->id])}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Parent id</label>
-            <input type="text" name="parent_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$data->type}}">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Statü</label>
-            <select name="status">
-                <option selected="selected" disabled>{{$data->status}}</option>
-                <option>True</option>
-                <option>False</option>
+            <label for="exampleInputEmail1" class="form-label">Main Category</label>
+            <select name="parent_id">
+                <option value="0" selected="selected">Main Category</option>
+                @foreach($datalist as $rs)
+                <option value="{{$rs->id}}">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}}</option>
+                @endforeach
             </select>
         </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Türü</label>
+            <input type="text" name="type" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$data->type}}">
+        </div>
+
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Title</label>
             <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$data->title}}">
@@ -35,10 +37,18 @@
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Resim</label>
-            <input type="file" name="image" class="form-control" value="{{$data->image}}">
+            <input type="file" name="image" class="form-control" value="{{Storage::url($data->image)}}">
             @if($data->image)
                 <img src="{{Storage::url($data->image)}}" height="100" alt="">
             @endif
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Statü</label>
+            <select name="status">
+                <option selected="selected" disabled>{{$data->status}}</option>
+                <option>True</option>
+                <option>False</option>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Güncelle</button>
     </form>

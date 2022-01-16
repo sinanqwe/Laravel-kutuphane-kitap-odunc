@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use App\Models\Image;
 use Illuminate\Http\Request;
-use App\Models\Books;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,30 +25,31 @@ class ImageController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function create($id)
     {
-        $data = Books::find($id);
-        $images = DB::table('images')->where('books_id', '=', $id)->get();
-        return view('admin.image_add', ['data' => $data, 'images' => $images]);
+        $data = Book::find($id);
+        $images = DB::table('images')->where('book_id','=',$id)->get();
+        return view('admin.image_add',['data'=>$data, 'images'=>$images]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request, $id)
     {
         $data = new Image;
-        $data->books_id = $id;
         $data->title = $request->input('title');
-        $data->image = Storage::putFile('images', $request->file('image'));
-
+        $data->book_id = $id;
+        $data->image= Storage::putFile('images', $request->file('image'));
         $data->save();
-        return redirect()->route('admin_image_add',['id'=> $id]);
+        return redirect()->route('admin_image_add',['id'=>$id]);
     }
 
     /**
@@ -87,13 +89,15 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Image  $image
+     * @param \App\Models\Image $image
+     * @param $id
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image,$id, $books_id)
+    public function destroy(Image $image, $id, $book_id)
     {
         $data = Image::find($id);
         $data->delete();
-        return redirect()->route('admin_books');
+        return back()->withInput();
     }
 }

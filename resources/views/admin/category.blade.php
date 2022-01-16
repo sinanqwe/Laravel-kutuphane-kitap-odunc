@@ -52,8 +52,8 @@
                         <tr>
                             <td>{{$rs->id}}</td>
                             <td>
-                               <!-- {{\App\Http\Controllers\CategoryController::getParentsTree($rs, $rs->title)}}-->
-                               {{$rs-parent_id}}
+                               
+                               {{$rs->parent_id}}
                             </td>
                             <td>{{$rs->title}}</td>
                             <td>{{$rs->keywords}}</td>

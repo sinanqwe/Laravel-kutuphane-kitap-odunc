@@ -1,3 +1,7 @@
+@php
+    $parentCategories = \App\Http\Controllers\HomeController::categorylist()
+@endphp
+
 <div class="col-lg-3">
                     <div class="hero__categories">
                         <div class="hero__categories__all">
@@ -5,16 +9,12 @@
                             <span>Tüm Türler</span>
                         </div>
                         <ul>
-                            <li><a href="#">Roman</a></li>
-                            <li><a href="#">Akademik</a></li>
-                            <li><a href="#">Dergi</a></li>
-                            <li><a href="#">Ders Kitapları</a></li>
-                            <li><a href="#">Yemek</a></li>
-                            <li><a href="#">Çocuk Kitabı</a></li>
-                            <li><a href="#">Eklenecek </a></li>
-                            <li><a href="#">Eklenecek</a></li>
-                            <li><a href="#">Eklenecek</a></li>
-                            <li><a href="#">Eklenecek</a></li>
+                            @foreach($parentCategories as $rs)
+                            <li><a href="#">{{$rs->title}}</a></li>
+                                @if(count($rs->children))
+                                    @include('home.categorytree', ['children'=>$rs->children])
+                                @endif
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -27,11 +27,5 @@
                             </form>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="{{asset('assets')}}/img/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span></span>
-                            <h2>Kitap <br />Ödünç Al</h2>
-                            <p>Vaktinde getirmeyi unutma!</p>
-                        </div>
-                    </div>
+                    @include('home._slider')
                 </div>

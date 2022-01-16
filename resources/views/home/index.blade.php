@@ -1,6 +1,29 @@
+
 @extends('layouts.home')
 
-@section('title', 'Kütüphane Kitap Ödünç Sitesi')
+@section('title', $setting->title)
 
-@section('description', 'Kütüphane Ödünç Sitesi')
-@section('keywords', 'Kitap, kütüphane, Ödünç al')
+@section('description'){{$setting->description}}@endsection
+
+@section('keywords', $setting->keywords)
+
+@section('content')
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            @include('home._menu')
+        </div>
+    </div>
+</section>
+
+<section class="categories">
+    <div class="container">
+        <div class="row">
+          @include('home._category')
+        </div>
+    </div>
+</section>
+
+@endsection
+

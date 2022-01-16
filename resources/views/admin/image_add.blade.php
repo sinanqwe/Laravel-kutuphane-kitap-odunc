@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="container-fluid">
-        <h1 class="h3 mb-4 text-gray-800" style="margin-top: 50px;">Kitap : {{$data->name}}</h1>
+        <h1 class="h3 mb-4 text-gray-800" style="margin-top: 50px;">Kitap :</h1>
 
         <form role="form" action="{{route('admin_image_store', ['id'=>$data->id])}}" method="post" enctype="multipart/form-data">
             @csrf
@@ -56,7 +56,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('admin_image_delete', ['id'=> $rs->id, 'books_id' => $data->id])}}" onclick="return confirm('Silmek istediğine emin misin ?')"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{{route('admin_image_delete', ['id'=> $rs->id, 'book_id' =>$data->id])}}" onclick="return confirm('Silmek istediğine emin misin ?')"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                             @endforeach
