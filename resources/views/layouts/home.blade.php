@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 .mySlides {display:none;}
+
+.featured__item__pic{
+    height: 415px;
+}
 </style>
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{asset('assets')}}/css/bootstrap.min.css" type="text/css">
@@ -28,6 +32,9 @@
     <link rel="stylesheet" href="{{asset('assets')}}/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="{{asset('assets')}}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{asset('assets')}}/css/style.css" type="text/css">
+
+    
+
     @yield('css')
     @yield('headerjs')
 </head>
@@ -41,5 +48,6 @@
 
 @include('home._footer')
 @yield('footerjs')
+
 </body>
 </html>

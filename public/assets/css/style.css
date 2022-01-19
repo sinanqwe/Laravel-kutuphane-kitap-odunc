@@ -775,8 +775,7 @@ ol {
 	font-size: 18px;
 	color: #1c1c1c;
 	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 2px;
+	text-transform: capitalize;
 	padding: 12px 0 10px;
 	background: #ffffff;
 	display: block;
@@ -858,7 +857,7 @@ ol {
 }
 
 .featured__item__pic {
-	height: 270px;
+	height: 415px;
 	position: relative;
 	overflow: hidden;
 	background-position: center center;

@@ -24,6 +24,9 @@
                     Logout
                 </a>
                 @endauth
+                @section('footerjs')
+                    @livewireScripts
+                @endsection
             </div>
         </li>
     </ul>

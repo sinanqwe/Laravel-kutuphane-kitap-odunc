@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use phpDocumentor\Reflection\File;
 
 class BookController extends Controller
 {
@@ -32,7 +31,6 @@ class BookController extends Controller
      */
     public function create()
     {
-        /** @var TYPE_NAME $datalist */
         $data = Category::with('children')->get();
         return view('admin.book_add',['data'=>$data]);
     }

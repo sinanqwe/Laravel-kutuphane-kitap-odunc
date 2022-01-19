@@ -1,13 +1,19 @@
+
+<style>
+    ul .ull{
+        border: 0px solid white;
+    }
+</style>
+
 @foreach($children as $subcategory)
-    <ul>
+    <ul class="ull">
         @if(count($subcategory->children))
-            <li>{{$subcategory->title}}</li>
-                <ul>
-                    @include('home.categorytree',['children'=>$subcategory->children])
+            <li><i class="fa fa-caret-right"></i>{{$subcategory->title}}</li>
+                <ul class="ull">
+                   @include('home.categorytree',['children'=>$subcategory->children])
                 </ul>
-            <hr>
         @else
-        <li><a href="{{route('categorybooks',['id'=>$subcategory->id])}}">{{$subcategory->title}}</a> </li>
+        <li><a href="{{route('categorybooks',['id'=>$subcategory->id])}}"><i class="fa fa-caret-right"></i>{{$subcategory->title}}</a> </li>
         @endif
     </ul>
 @endforeach

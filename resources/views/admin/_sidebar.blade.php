@@ -56,26 +56,33 @@
             </a>
         </li>
 
-
-
-        <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+            <a class="nav-link collapsed" href="{{route('admin_review')}}">
+            <i class="fa fa-comment"></i>
+                <span>Yorumlar</span>
+            </a>
         </li>
 
-        <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+            <a class="nav-link collapsed" href="{{route('admin_faq')}}">
+            <i class="fa fa-question-circle"></i>
+                <span>Faq</span>
+            </a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('admin_reservation')}}">
+            <i class="fa fa-book"></i>
+                <span>Rezervasyonlar</span>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('admin_users')}}">
+            <i class="fa fa-users"></i>
+                <span>Üyeler</span>
+            </a>
+        </li>
 
         </ul>
         <!-- End of Sidebar -->

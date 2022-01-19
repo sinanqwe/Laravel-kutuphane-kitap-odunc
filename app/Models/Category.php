@@ -13,7 +13,7 @@ class Category extends Model
     ];
 
     #One to Many
-    public function books()
+    public function book()
     {
         return $this->hasMany(Book::class);
     }

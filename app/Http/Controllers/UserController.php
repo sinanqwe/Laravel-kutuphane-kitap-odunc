@@ -4,9 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    public function myreviews()
+    {
+        $datalist = Review::where('user_id','=',Auth::user()->id)->get();
+        return view('home.user_reviews',['datalist'=>$datalist]);
+    }
+    public function destroymyreview(Review $review,$id)
+    {
+        
+        $data = Review::find($id);
+        $data->delete();
+        return redirect()->back()->with('success','Review Deleted');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Mesajlar')
+@section('title', 'Rezervasyonlar')
 
 @section('content')
 
@@ -10,7 +10,7 @@
         <span class="icon text-white-50">
             <i class="fas fa-plus"></i>
         </span>
-        <span class="text">Mesajlar</span>
+        <span class="text">Rezervasyonlar</span>
     </a>
 
     <div class="card shadow mb-4">
@@ -69,20 +69,14 @@
                                 <a href="{{route('admin_message_delete', ['id'=> $rs->id])}}" onclick="return confirm('Are you sure?')">
                                     <i class="fas fa-trash-alt"></i> Sil
                                 </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-            </td>
-            </tr>
-            @endforeach
-            </tbody>
-            </table>
         </div>
     </div>
-</div>
-
-</div>
-<!-- /.container-fluid -->
-
-
 </div>
 
 @endsection

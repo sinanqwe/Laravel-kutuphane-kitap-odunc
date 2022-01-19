@@ -5,5 +5,6 @@
 @section('content')
     <div class="container-fluid">
     @include('admin._content')
+
     </div>
 @endsection

@@ -16,10 +16,9 @@
         <div class="mb-3">
             <label class="form-label">Kategori</label>
             <select name="category_id">
-                <option value="0" selected="selected">Main Category</option>
                 @foreach($datalist as $rs)
-                    <option value="{{$rs->id}}" @if ($rs->id == $data->parent_id) selected="selected" @endif >
-                        {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}}
+                    <option value="{{$rs->id}}" @if($rs->id == $data->category_id) selected @endif>
+                    {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}}
                     </option>
                 @endforeach
             </select>
@@ -27,7 +26,7 @@
         <div class="mb-3">
             <label class="form-label">Statü</label>
             <select name="status">
-                <option selected disabled>{{$data->status}}</option>
+                <option selected>{{$data->status}}</option>
                 <option>True</option>
                 <option>False</option>
             </select>

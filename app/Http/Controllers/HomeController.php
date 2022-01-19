@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\Book;
 use App\Models\Image;
+use App\Models\Reservation;
 use App\Models\Message;
+use App\Models\Review;
+use App\Models\Faq;
 
 class HomeController extends Controller
 {
@@ -22,13 +25,18 @@ class HomeController extends Controller
         return Setting::first();
     }
 
+    public static function countreview($id)
+    {
+        return Review::where('book_id', $id)->count();
+    }
+
     public function index()
     {
         $setting = Setting::first();
-        $slider = Book::select('id','title','image','type')->limit(10)->get();
-        $daily = Book::select('id','title','image','type')->limit(8)->inRandomOrder()->get();
-        $last = Book::select('id','title','image','type')->limit(8)->orderByDesc('id')->get();
-        $best = Book::select('id','title','image','type')->limit(8)->orderByDesc('type')->get();
+        $slider = Book::select('id','title','image','type','status')->where('status', '=', 'True')->limit(10)->get();
+        $daily = Book::select('id','title','image','type','status')->where('status', '=', 'True')->limit(8)->inRandomOrder()->get();
+        $last = Book::select('id','title','image','type','status')->where('status', '=', 'True')->limit(8)->orderByDesc('id')->get();
+        $best = Book::select('id','title','image','type','status')->where('status', '=', 'True')->limit(8)->orderByDesc('type')->get();
         $data = ['setting'=>$setting,
                 'slider'=>$slider,
                 'daily'=>$daily,
@@ -53,7 +61,8 @@ class HomeController extends Controller
 
     public function faq()
     {
-        return view('home.aboutus');
+        $datalist = Faq::all();
+        return view('home.faq',['datalist'=>$datalist]);
     }
 
     public function contact()
@@ -62,25 +71,49 @@ class HomeController extends Controller
         return view('home.contact',['setting'=>$setting]);
     }
 
-    public function books($id)
+    
+    public function getbook(Request $request)
+    {
+        $search = $request->input('search');
+        $count = Book::where('title','like','%'.$search.'%')->where('status', '=', 'True')->get()->count();
+        if ($count == 1)
+        {
+            $data = Book::where('title','like','%'.$search.'%')->first();
+            return redirect()->route('book',['id'=>$data->id]);
+        }
+        else
+        {
+            return redirect()->route('booklist',['search'=>$search]);
+        }
+
+    }
+
+    public function booklist($search)
+    {
+        $datalist = Book::where('title','like','%'.$search.'%')->where('status', '=', 'True')->get();
+
+        return view('home.search_books',['search'=>$search, 'datalist'=>$datalist] );
+    }
+ 
+
+    public function book($id)
     {
         $data = Book::find($id);
         $datalist = Image::where('book_id',$id)->get();
+        $reviews = Review::where('book_id',$id)->get();
 
-        return view('home.book_detail',['data'=>$data, 'datalist'=>$datalist] );
+        return view('home.book_detail',['data'=>$data, 'datalist'=>$datalist,'reviews'=>$reviews] );
     }
 
-    public function addtocart($id)
+    public function reservation($id)
     {
-        echo "make a reservation <br>";
-        $data = Book::find($id);
-        print_r($data);
-        exit();
+        $datalist = Reservation::all();
+        return view('home.user_reservations',['datalist'=>$datalist] );
     }
 
     public function categorybooks($id)
     {
-        $datalist = Book::where('category_id',$id)->get();
+        $datalist = Book::where('category_id',$id)->where('status', '=', 'True')->get();
         $data = Category::find($id);
         return view('home.category_books',['data'=>$data , 'datalist'=>$datalist] );
     }

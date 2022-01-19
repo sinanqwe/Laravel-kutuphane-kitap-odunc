@@ -100,6 +100,109 @@
         $('.hero__categories ul').slideToggle(400);
     });
 
+    $('.hero__categories__all1').on('click', function(){
+        $('.hero__categories1 ul').slideToggle(400);
+    });
+    $('.hero__categories__all2').on('click', function(){
+        $('.hero__categories2 ul').slideToggle(400);
+    });
+    $('.hero__categories__all3').on('click', function(){
+        $('.hero__categories3 ul').slideToggle(400);
+    });
+    $('.hero__categories__all4').on('click', function(){
+        $('.hero__categories4 ul').slideToggle(400);
+    });
+    $('.hero__categories__all5').on('click', function(){
+        $('.hero__categories5 ul').slideToggle(400);
+    });
+    $('.hero__categories__all6').on('click', function(){
+        $('.hero__categories6 ul').slideToggle(400);
+    });
+    $('.hero__categories__all7').on('click', function(){
+        $('.hero__categories7 ul').slideToggle(400);
+    });
+    $('.hero__categories__all8').on('click', function(){
+        $('.hero__categories8 ul').slideToggle(400);
+    });
+    $('.hero__categories__all9').on('click', function(){
+        $('.hero__categories9 ul').slideToggle(400);
+    });
+    $('.hero__categories__all10').on('click', function(){
+        $('.hero__categories10 ul').slideToggle(400);
+    });
+    $('.hero__categories__all11').on('click', function(){
+        $('.hero__categories11 ul').slideToggle(400);
+    });
+    $('.hero__categories__all12').on('click', function(){
+        $('.hero__categories12 ul').slideToggle(400);
+    });
+    $('.hero__categories__all13').on('click', function(){
+        $('.hero__categories13 ul').slideToggle(400);
+    });
+    $('.hero__categories__all14').on('click', function(){
+        $('.hero__categories14 ul').slideToggle(400);
+    });
+    $('.hero__categories__all15').on('click', function(){
+        $('.hero__categories15 ul').slideToggle(400);
+    });
+    $('.hero__categories__all16').on('click', function(){
+        $('.hero__categories16 ul').slideToggle(400);
+    });
+    $('.hero__categories__al17').on('click', function(){
+        $('.hero__categories17 ul').slideToggle(400);
+    });
+    $('.hero__categories__all18').on('click', function(){
+        $('.hero__categories18 ul').slideToggle(400);
+    });
+    $('.hero__categories__all19').on('click', function(){
+        $('.hero__categories19 ul').slideToggle(400);
+    });
+    $('.hero__categories__all20').on('click', function(){
+        $('.hero__categories20 ul').slideToggle(400);
+    });
+    $('.hero__categories__all21').on('click', function(){
+        $('.hero__categories21 ul').slideToggle(400);
+    });
+    $('.hero__categories__all22').on('click', function(){
+        $('.hero__categories22 ul').slideToggle(400);
+    });
+    $('.hero__categories__all23').on('click', function(){
+        $('.hero__categories23 ul').slideToggle(400);
+    });
+
+    $('.hero__categories__all24').on('click', function(){
+        $('.hero__categories24 ul').slideToggle(400);
+    });
+    $('.hero__categories__all25').on('click', function(){
+        $('.hero__categories25 ul').slideToggle(400);
+    });
+    $('.hero__categories__all26').on('click', function(){
+        $('.hero__categories26 ul').slideToggle(400);
+    });
+    $('.hero__categories__al27').on('click', function(){
+        $('.hero__categories27 ul').slideToggle(400);
+    });
+    $('.hero__categories__all28').on('click', function(){
+        $('.hero__categories28 ul').slideToggle(400);
+    });
+    $('.hero__categories__all29').on('click', function(){
+        $('.hero__categories29 ul').slideToggle(400);
+    });
+    $('.hero__categories__all30').on('click', function(){
+        $('.hero__categories30 ul').slideToggle(400);
+    });
+    $('.hero__categories__all31').on('click', function(){
+        $('.hero__categories31 ul').slideToggle(400);
+    });
+    $('.hero__categories__all32').on('click', function(){
+        $('.hero__categories32 ul').slideToggle(400);
+    });
+    $('.hero__categories__all33').on('click', function(){
+        $('.hero__categories33 ul').slideToggle(400);
+    });
+
+
+
     /*--------------------------
         Latest Product Slider
     ----------------------------*/

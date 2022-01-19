@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $title = $parent->title.'>'.$title;
         return CategoryController::getParentsTree($parent,$title);
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -106,7 +106,10 @@ class CategoryController extends Controller
         $data->title = $request->input('title');
         $data->keywords = $request->input('keywords');
         $data->description = $request->input('description');
-        $data->image = Storage::putFile('image', $request->file('image'));
+        if ($request->file('image')!=null)
+        {
+            $data->image = Storage::putFile('image', $request->file('image'));
+        }
         $data->status = $request->input('status');
         $data->save();
 

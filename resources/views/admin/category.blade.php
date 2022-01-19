@@ -10,7 +10,7 @@
             <span class="icon text-white-50">
                 <i class="fas fa-plus"></i>
             </span>
-        <span class="text">Kategoriler</span>
+        <span class="text">Kategori Ekle</span>
     </a>
 
     <!-- DataTales Example -->
@@ -51,9 +51,8 @@
                         @foreach($datalist as $rs)
                         <tr>
                             <td>{{$rs->id}}</td>
-                            <td>
-                               
-                               {{$rs->parent_id}}
+                            <td>   
+                            {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}}
                             </td>
                             <td>{{$rs->title}}</td>
                             <td>{{$rs->keywords}}</td>
